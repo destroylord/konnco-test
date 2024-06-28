@@ -12,6 +12,6 @@ class CreateItem extends CreateRecord
 
     protected function getCreatedNotificationMessage(): ?string
     {
-        return 'Penjual berhasil ditambahkan';
+        return 'Item berhasil ditambahkan';
     }
 }

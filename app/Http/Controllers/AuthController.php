@@ -17,6 +17,7 @@ class AuthController extends Controller
     public function authenticate(LoginRequest $request)
     {
         $request->authenticate();
+        return redirect('/');
     }
 
     public function register()

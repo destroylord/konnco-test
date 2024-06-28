@@ -29,10 +29,16 @@ class ItemResource extends Resource
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()
-                    ->prefix('$'),
+                    ->prefix('Rp'),
                 Forms\Components\TextInput::make('stock')
+                    ->label('Stok')
                     ->required()
                     ->numeric(),
+                Forms\Components\FileUpload::make('image')
+                    ->label('Gambar Produk')
+                    ->required()
+                    ->visibility('public')
+                    ->directory('items'),
             ]);
     }
 
@@ -43,7 +49,7 @@ class ItemResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->money()
+                    ->money('IDR')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('stock')
                     ->numeric()

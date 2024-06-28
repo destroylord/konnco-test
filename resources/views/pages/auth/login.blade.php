@@ -6,8 +6,8 @@
 @endif
 
 <div class="row">
-    <div class="col-lg-6 mx-auto mt-4 mb-4">
-        <div class="card">
+    <div class="col-lg-6 mx-auto my-4">
+        <div class="card my-4">
             <div class="card-header">
                 <h4>Login</h4>
             </div>

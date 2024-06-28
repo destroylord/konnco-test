@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', DashboardController::class)->name('home');
 
-Route::view('/detail/{id}', 'detail')->name('detail');
+Route::view('detail/{id}', 'detail')->name('detail');
 
 Route::middleware('guest')->group(function () {
     Route::controller(AuthController::class)->group(function () {
@@ -19,6 +19,9 @@ Route::middleware('guest')->group(function () {
     });
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', fn () => "Dashboard")->name('dashboard');
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('dashboard', fn () => "Dashboard")->name('dashboard');
+
+    Route::prefix('cart')->controller(CartController::class)->group(function () {
+    });
 });
