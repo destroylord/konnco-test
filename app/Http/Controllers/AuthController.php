@@ -14,6 +14,14 @@ class AuthController extends Controller
         return view('pages.auth.login');
     }
 
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        session()->regenerate();
+
+        return redirect('/');
+    }
+
     public function authenticate(LoginRequest $request)
     {
         $request->authenticate();

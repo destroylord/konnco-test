@@ -27,7 +27,10 @@
                     <a class="nav-link" href="#"><img src="/assets/images/user.svg"></a>
                 </li>
                 <li>
-                    <a class="nav-link" href="cart.html"><img src="/assets/images/cart.svg"></a>
+                    <a class="nav-link" href="{{ route('cart.index') }}"><img src="/assets/images/cart.svg"></a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ route('logout') }}"><i class="ti ti-logout text-white ms-3" style="font-size: 1.9rem;"></i></a>
                 </li>
                 @endrole
             </ul>

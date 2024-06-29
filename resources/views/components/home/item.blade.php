@@ -16,6 +16,7 @@
 <script>
     $('.btn-add-to-cart').one('click', function(e) {
         e.stopImmediatePropagation();
+        e.preventDefault();
 
         const itemId = $(this).data('id');
 

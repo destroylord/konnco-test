@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\CartException;
 use App\Http\Requests\CartRequest;
+use App\Models\Cart;
 use App\Repos\CartRepo;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,13 @@ class CartController extends Controller
     public function __construct()
     {
         $this->repo = new CartRepo;
+    }
+
+    public function index()
+    {
+        return view('pages.cart.index', [
+            'carts' => Cart::with('item')->get(),
+        ]);
     }
 
     public function store(CartRequest $request)
