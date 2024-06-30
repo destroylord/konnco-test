@@ -9,7 +9,7 @@
                 <h4>Registrasi</h4>
             </div>
             <div class="card-body">
-                <form action="" method="post">
+                <form action="/register" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="name">Nama Lengkap</label>
