@@ -22,7 +22,7 @@ class CartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'qty' => 'required|numeric|min:1',
+            'qty' => 'required|numeric|min:0',
             'item_id' => 'required|exists:items,id',
         ];
     }

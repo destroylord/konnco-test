@@ -30,6 +30,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/tiny-slider.js"></script>
     <script src="/assets/js/custom.js"></script>
@@ -40,6 +41,15 @@
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             }
         });
+
+        @if(session()->has('swal_e'))
+            Swal.fire({
+                icon: 'error',
+                text: '{{ session('swal_e') }}'
+                timer: 1500,
+                showCancelButton: false,
+            });
+        @endif
     </script>
 
     @stack('script')

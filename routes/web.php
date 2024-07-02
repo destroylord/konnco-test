@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', DashboardController::class)->name('home');
@@ -26,5 +27,10 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::prefix('cart')->controller(CartController::class)->group(function () {
         Route::get('/', 'index')->name('cart.index');
         Route::post('store', 'store')->name('cart.store');
+        Route::post('checkout', 'checkout')->name('cart.checkout');
+        Route::patch('update', 'update')->name('cart.update');
+        Route::delete('{cart}', 'destroy')->name('cart.destroy');
     });
 });
+
+Route::get('purchase/{purchase}', [PurchaseController::class, 'show'])->name('purchase.show');

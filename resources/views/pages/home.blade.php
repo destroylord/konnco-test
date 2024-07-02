@@ -32,3 +32,30 @@
     </div>
 </div>
 @endsection
+
+@push('script')
+<script>
+    $('.btn-add-to-cart').one('click', function(e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+
+        const itemId = $(this).data('id');
+
+        $.ajax({
+            url: "{{ route('cart.store') }}",
+            method: 'POST',
+            data: {
+                item_id: itemId,
+                qty: 1,
+            },
+            dataType: 'json',
+            success: function(data) {
+                toastr.success(data.message);
+            },
+            error: function(data) {
+                toastr.error(data.responseJSON.message);
+            }
+        })
+    });
+</script>
+@endpush
