@@ -2,13 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PurchaseRequest;
 use App\Models\Purchase;
-use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
 {
     public function show(Purchase $purchase)
     {
-        dd($purchase);
+        return view('pages.purchase.show', compact('purchase'));
+    }
+
+    public function upload(PurchaseRequest $request, Purchase $purchase)
+    {
+        $file = $request->file('file');
+
+        $purchase->update([
+            'file' => $file->storePublicly('purchases', 'public'),
+        ]);
+
+        return to_route('purchase.show', $purchase);
     }
 }

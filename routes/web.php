@@ -34,3 +34,4 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 });
 
 Route::get('purchase/{purchase}', [PurchaseController::class, 'show'])->name('purchase.show');
+Route::post('purchase/{purchase}', [PurchaseController::class, 'upload'])->name('purchase.upload');

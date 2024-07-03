@@ -20,11 +20,9 @@ class CartRepo
 
         $cart = Cart::where($clause)->first();
         $item = Item::find($data['item_id']);
+        $qty = ($cart?->qty ?? 0) + $data['qty'];
 
-        if (!$cart)
-            return Cart::create(array_merge($clause, ['qty' => $data['qty']]));
-
-        return $this->manage($cart, $item, $cart->qty + $data['qty']);
+        return $this->manage($cart, $item, $qty, $clause);
     }
 
     public function update(User $user, array $data): Cart|bool
@@ -64,16 +62,20 @@ class CartRepo
                 'total' => $cart->item->price * $cart->qty,
             ]);
 
+            $cart->item->decrement('stock', $cart->qty);
             $cart->delete();
         });
 
         return $purchase;
     }
 
-    private function manage(Cart $cart, Item $item, $qty): Cart|bool
+    private function manage(Cart|null $cart, Item $item, $qty, array $data = []): Cart|bool
     {
         if ($qty > $item->stock)
             throw new CartException('Anda tidak dapat menambahkan barang ini lagi');
+
+        if (!$cart)
+            return Cart::create(array_merge($data, ['qty' => $qty]));
 
         if ($qty <= 0)
             return $cart->delete();
