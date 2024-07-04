@@ -9,9 +9,4 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateSeller extends CreateRecord
 {
     protected static string $resource = SellerResource::class;
-
-    protected function getCreatedNotificationMessage(): ?string
-    {
-        return 'Penjual berhasil ditambahkan';
-    }
 }

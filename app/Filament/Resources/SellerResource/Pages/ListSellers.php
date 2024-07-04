@@ -5,6 +5,7 @@ namespace App\Filament\Resources\SellerResource\Pages;
 use App\Filament\Resources\SellerResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Tables\Table;
 
 class ListSellers extends ListRecords
 {
@@ -13,7 +14,7 @@ class ListSellers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            // Actions\CreateAction::make(),
         ];
     }
 }

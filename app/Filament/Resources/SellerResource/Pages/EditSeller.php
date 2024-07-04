@@ -16,9 +16,4 @@ class EditSeller extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
-
-    protected function getSavedNotificationMessage(): ?string
-    {
-        return 'Data penjual berhasil disimpan';
-    }
 }
