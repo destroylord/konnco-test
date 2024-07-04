@@ -12,27 +12,32 @@
                 <li class="nav-item ">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="active"><a class="nav-link" href="shop.html">Shop</a></li>
+                <li class=""><a class="nav-link" href="shop.html">Shop</a></li>
             </ul>
 
-            <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+            <ul class="custom-navbar-cta navbar-nav ms-5">
                 @guest
-                <li>
-                    <a class="nav-link" href="{{ route('login') }}"><img src="/assets/images/user.svg"></a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}"><img src="/assets/images/user.svg"></a>
+                    </li>
+                @else
+                    @role('user')
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><img src="/assets/images/user.svg"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('cart.index') }}"><img src="/assets/images/cart.svg"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="ti ti-logout text-white ms-3" style="font-size: 1.9rem;"></i>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    @endrole
                 @endguest
-
-                @role('user')
-                <li>
-                    <a class="nav-link" href="#"><img src="/assets/images/user.svg"></a>
-                </li>
-                <li>
-                    <a class="nav-link" href="{{ route('cart.index') }}"><img src="/assets/images/cart.svg"></a>
-                </li>
-                <li>
-                    <a class="nav-link" href="{{ route('logout') }}"><i class="ti ti-logout text-white ms-3" style="font-size: 1.9rem;"></i></a>
-                </li>
-                @endrole
             </ul>
         </div>
     </div>
