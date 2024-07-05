@@ -21,7 +21,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('dashboard', fn () => "Dashboard")->name('dashboard');
 
     Route::prefix('cart')->controller(CartController::class)->group(function () {
