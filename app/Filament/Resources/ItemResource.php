@@ -56,6 +56,9 @@ class ItemResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->money('IDR')
                     ->sortable(),
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Image')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('stock')
                     ->numeric()
                     ->sortable(),
