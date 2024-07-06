@@ -36,7 +36,7 @@ class AuthController extends Controller
     public function store(RegisterRequest $request)
     {
         $user = User::create($request->validated());
-        $user->assignRole('seller');
+        $user->assignRole('user');
 
         return redirect()->route('login')->with('alert_s', 'Berhasil mendaftarkan akun');
     }
