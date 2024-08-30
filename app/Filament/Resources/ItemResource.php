@@ -2,10 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ItemStatus;
 use App\Filament\Resources\ItemResource\Pages;
-use App\Models\Category;
 use App\Models\Item;
 use Filament\Forms;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -42,6 +43,11 @@ class ItemResource extends Resource
                     ->required()
                     ->visibility('public')
                     ->directory('items'),
+                ToggleButtons::make('status')
+                    ->label('Status')
+                    ->options(ItemStatus::labels())
+                    ->default(ItemStatus::ACTIVE)
+                    ->inline(true)
             ]);
     }
 

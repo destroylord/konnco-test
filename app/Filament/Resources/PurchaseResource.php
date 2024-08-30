@@ -34,12 +34,10 @@ class PurchaseResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')->label('Pembeli')->sortable(),
                 Tables\Columns\TextColumn::make('datetime')->label('Tanggal Pembelian')->sortable(),
-                Tables\Columns\SelectColumn::make('status')->label('Status')
-                        ->options(PurchaseStatus::labels())
-                        ->sortable(),
-                Tables\Columns\ImageColumn::make('file')
-                    ->label('File')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('status')->label('Status')->sortable(),
+                // Tables\Columns\SelectColumn::make('status')->label('Status')
+                //         ->options(PurchaseStatus::labels())
+                //         ->sortable(),
                 
                 Tables\Columns\TextColumn::make('total')
                     ->label('Total')

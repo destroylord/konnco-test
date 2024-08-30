@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->timestamp('datetime');
             $table->enum('status', PurchaseStatus::values());
-            $table->string('file')->nullable();
             $table->unsignedInteger('total');
+            $table->string('snap_token')->nullable();
             $table->timestamps();
         });
     }

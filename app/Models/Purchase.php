@@ -14,8 +14,13 @@ class Purchase extends Model
         'user_id',
         'datetime',
         'status',
-        'file',
+        'snap_token',
         'total',
+    ];
+
+    protected $casts = [
+        'status' => PurchaseStatus::class,
+        'datetime' => 'datetime',
     ];
 
     public function user()
@@ -26,13 +31,5 @@ class Purchase extends Model
     public function details()
     {
         return $this->hasMany(PurchaseDetail::class);
-    }
-
-    protected function casts(): array
-    {
-        return [
-            'status' => PurchaseStatus::class,
-            'datetime' => 'datetime',
-        ];
     }
 }

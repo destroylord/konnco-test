@@ -31,7 +31,9 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::patch('update', 'update')->name('cart.update');
         Route::delete('{cart}', 'destroy')->name('cart.destroy');
     });
+
+    Route::get('/my-purchases', [PurchaseController::class, 'index'])->name('purchase.index');
 });
 
 Route::get('purchase/{purchase}', [PurchaseController::class, 'show'])->name('purchase.show');
-Route::post('purchase/{purchase}', [PurchaseController::class, 'upload'])->name('purchase.upload');
+Route::put('purchase/{id}/update', [PurchaseController::class, 'update'])->name('purchase.update');

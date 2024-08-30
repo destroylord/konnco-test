@@ -4,10 +4,12 @@
         <h3 class="product-title">{{ $item->name }}</h3>
         <strong class="product-price">Rp {{ number_format($item->price) }}</strong>
 
-        @auth
-        <span class="icon-cross btn-add-to-cart" data-id="{{ $item->id }}">
-            <img src="/assets/images/cross.svg" class="img-fluid">
-        </span>
-        @endauth
+       
+            @auth
+            <button class="icon-cross btn-add-to-cart" {{ $item->stock == 0 ? 'disabled' : '' }} data-id="{{ $item->id }}">
+                <img src="/assets/images/cross.svg" class="img-fluid">
+            </button>
+            @endauth
+       
     </a>
 </div>

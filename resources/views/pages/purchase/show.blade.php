@@ -18,38 +18,20 @@
 <div class="untree_co-section before-footer-section">
     <div class="container">
         <div class="row justify-content-center">
-            @if (!$purchase->file)
             <div class="col-12 col-md-4">
+    
                 <div class="card">
-                    <form
-                        class="card-body"
-                        action=""
-                        method="POST"
-                        enctype="multipart/form-data"
-                    >
-                        @csrf
-                        <h6 class="text-center">Upload Bukti Pembayaran</h6>
-
-                        @error('file')
-                            <small class="text-danger text-center m-0">{{ $message }}</small>
-                        @enderror
-
-                        <input
-                            type="file"
-                            name="file"
-                            id="bukti-pembayaran"
-                        >
-
-                        <div class="d-flex justify-content-center">
-                            <button
+                        <div class="card-body">
+                            <div class="d-flex justify-content-center">
+                                <button
+                                id="pay-button"
                                 type="submit"
                                 class="btn btn-sm btn-primary"
-                            >Simpan Bukti</button>
+                                >Bayar Sekarang</button>
+                            </div>
                         </div>
-                    </form>
                 </div>
             </div>
-            @endif
             <div class="col-12 col-md-8">
                 <div class="card">
                     <div class="card-body">
@@ -105,23 +87,44 @@
 </div>
 @endsection
 
-@push('style')
-<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
-@endpush
-
 @push('script')
-<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-<script src="https://unpkg.com/filepond-plugin-pdf-preview/dist/filepond-plugin-pdf-preview.min.js"></script>
+ <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
 
-<script>
-    FilePond.registerPlugin(FilePondPluginImagePreview);
-
-    const filepond = FilePond.create(document.getElementById('bukti-pembayaran'), {
-        credits: false,
-        labelIdle: 'Klik di sini',
-        storeAsFile: true,
-    });
-</script>
+    <script type="text/javascript">
+    
+        document.getElementById('pay-button').onclick = function(){
+            // SnapToken acquired from previous step
+            snap.pay('{{ $purchase->snap_token }}', {
+            // Optional
+            onSuccess: function(result){
+                
+                /* You may add your own js here, this is just example */
+                // update status di database
+                $.ajax({
+                    type: 'PUT',
+                    url: '/purchase/' + {{ $purchase->id }} + '/update',
+                    data: {
+                        result: 'success'
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        window.location.href = "/purchase/" + {{ $purchase->id }} ;
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+            });
+                
+            },
+            // Optional
+            onPending: function(result){
+                /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+            },
+            // Optional
+            onError: function(result){
+                /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+            }
+            });
+        };
+    </script>
 @endpush

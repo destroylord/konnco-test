@@ -40,16 +40,42 @@ class CartRepo
 
     public function checkout(User $user): Purchase
     {
+        
         $carts = Cart::where('user_id', $user->id)->get();
-
+        $total = $carts->sum(fn ($cart) => $cart->item->price * $cart->qty);
+      
         if ($carts->count() < 1)
             throw new CartException('Cart masih kosong');
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => rand(),
+                'gross_amount' => $total,
+            ),
+            'customer_details' => array(
+                'first_name' => $user->name,
+                'email' => $user->email,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
 
         $purchase = Purchase::create([
             'user_id' => $user->id,
             'datetime' => now(),
             'status' => PurchaseStatus::UNPAID,
-            'file' => null,
+            'snap_token' => $snapToken,
             'total' => $carts->sum(fn ($cart) => $cart->item->price * $cart->qty)
         ]);
 
