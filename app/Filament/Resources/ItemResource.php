@@ -68,6 +68,8 @@ class ItemResource extends Resource
                 Tables\Columns\TextColumn::make('stock')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Status')->sortable(),
             ])
             ->filters([
                 //

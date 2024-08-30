@@ -26,7 +26,7 @@
         <div class="row g-5 mb-5">
             <div class="col-lg-4">
                 <div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Mebel App<span>.</span></a></div>
-                <p class="mb-4">Mebel App adalah aplikasi yang membantu Anda mencari dan membeli furniture sesuai dengan kebutuhan Anda. Dengan aplikasi ini, Anda dapat mencari furniture yang sesuai dengan keluhan Anda, melihat detail produk, melihat harga, dan membeli produk melalui platform kami. Semoga dengan adanya Mebel Siapa Dia, Anda dapat mencari dan menikmati furniture yang sesuai dengan kebutuhan Anda.</p>
+                <p class="mb-4">Mebel App adalah aplikasi yang membantu Anda mencari dan membeli furniture sesuai dengan kebutuhan Anda. Dengan aplikasi ini, Anda dapat mencari furniture yang sesuai dengan keluhan Anda, melihat detail produk, melihat harga, dan membeli produk melalui platform kami.</p>
 
                 <ul class="list-unstyled custom-social">
                     <li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
